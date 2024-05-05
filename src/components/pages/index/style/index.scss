@@ -1,0 +1,6 @@
+.index-table {
+  height: calc(100vh - $top-bar-height - $container-padding);
+  @include tablet {
+    height: calc(100vh - $top-bar-height - $container-padding - 140px);
+  }
+}

@@ -1,0 +1,15 @@
+//64 высота бара
+//32 padding-a у .v-container
+
+$top-bar-height: 64px;
+$container-padding: 32px;
+
+.full-height {
+  height: calc(100vh - $top-bar-height - $container-padding);
+}
+
+@mixin tablet {
+  @media screen and (max-width: 960px) {
+    @content
+  }
+}

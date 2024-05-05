@@ -1,0 +1,6 @@
+.order-table {
+  height: calc(100vh - $top-bar-height - $container-padding);
+  @include tablet {
+    height: calc(100vh*0.5 - $top-bar-height - $container-padding);
+  }
+}
