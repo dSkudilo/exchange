@@ -1,25 +1,31 @@
-import {onMounted, ref} from "vue";
+import {onMounted, watch} from "vue";
 import {storeToRefs} from "pinia";
-import {limitsList} from "./limitsList";
 
-export function useData(store) {
-  const limit = ref(limitsList[0])
-  const symbol = 'BTCUSDT'
-
+export function useData(storeOrderBook, storeCurrency) {
   const {
     asks,
     bids,
     isLoading,
-  } = storeToRefs(store)
+    limit,
+  } = storeToRefs(storeOrderBook)
 
+  const {selectedCurrency} = storeToRefs(storeCurrency)
+
+  watch(() => limit.value, () =>
+    storeOrderBook.getData({limit:limit.value, symbol: selectedCurrency.value.name})
+  )
 
   onMounted(() => {
-    store.getData({limit:100, symbol:'BTCUSDT'})
+    if (asks.value.length === 0 && bids.value.length === 0) {
+      storeOrderBook.getData({limit:limit.value, symbol: selectedCurrency.value.name})
+      storeOrderBook.createAndSubscribeSocket(selectedCurrency.value.name)
+    }
   })
+
   return {
     asks,
     bids,
     isLoading,
-    limit
+    limit,
   }
 }

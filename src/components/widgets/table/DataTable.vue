@@ -2,27 +2,33 @@
   <SimpleTable :fixedHeader="fixedHeader" class="rounded" >
     <thead>
       <DataTableTr>
-        <DataTableTh
+        <template
           v-for="item in headers"
           :key="item.name"
         >
-          {{item.title}}
-        </DataTableTh>
+          <DataTableTh v-if="!item.hide">
+            {{item.title}}
+          </DataTableTh>
+        </template>
       </DataTableTr>
     </thead>
 
-    <tbody >
+    <tbody>
       <DataTableTr
         v-for="item in list"
         :key="item.id"
       >
-        <slot
+        <template
           v-for="(header, id) in headers"
           :key="header.key"
-          :name="header.key"
-          :item="getItem(item, header.field, id)"
-          :data="item"
-        />
+        >
+          <slot
+            v-if="!header.hide"
+            :name="header.key"
+            :item="getItem(item, header.field, id)"
+            :data="item"
+          />
+        </template>
       </DataTableTr>
     </tbody>
 

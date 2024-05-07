@@ -9,10 +9,9 @@
         <DataTable
           fixed-header
           :list="bids"
-          :headers="headers"
+          :headers="bidsTableHeaders"
           class="order-table"
         >
-
           <template #price="{item}">
             <DataTableTd>
               {{item}}
@@ -37,7 +36,7 @@
                 <SimpleSelect
                   density="compact"
                   hide-details
-                  :items="limitsList"
+                  :items="LIMIT_LIST"
                   v-model="limit"
                 />
               </SimpleCol>
@@ -50,7 +49,7 @@
         <DataTable
           fixed-header
           :list="asks"
-          :headers="headers"
+          :headers="asksTableHeaders"
           class="order-table"
         >
 
@@ -78,7 +77,7 @@
                 <SimpleSelect
                   density="compact"
                   hide-details
-                  :items="limitsList"
+                  :items="LIMIT_LIST"
                   v-model="limit"
                 />
               </SimpleCol>
@@ -99,19 +98,22 @@ import {DataTable, DataTableTd} from "@/components/widgets/table";
 import {useData} from "./model/useData";
 import {useOrderBook} from "@/stores/orderBook";
 import {SimpleSelect} from "@/components/ui/facades/simpleSelect";
-import {limitsList} from './model/limitsList'
 import {SimpleProgressCircular} from "@/components/ui/facades/simpleProgressCircular";
+import {useCurrency} from "@/stores/currency";
+import {LIMIT_LIST} from "@/constants/OREDER_BOOK";
+import {useTableHeaders} from "./model/useTableHeaders";
 
-const headers = [
-  {title: 'Price', key: 'price'},
-  {title: 'Quantity', key: 'quantity'},
-  {title: 'Total(Price * Quantity)', key: 'total'},
-]
-const orderBookStore = useOrderBook()
+const storeOrderBook = useOrderBook()
+const  storeCurrency = useCurrency()
 const {
   asks,
   bids,
   isLoading,
   limit
-} = useData(orderBookStore)
+} = useData(storeOrderBook, storeCurrency)
+
+const {
+  bidsTableHeaders,
+  asksTableHeaders
+} = useTableHeaders()
 </script>

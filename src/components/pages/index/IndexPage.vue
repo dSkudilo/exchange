@@ -56,15 +56,18 @@ import {useLogs} from "@/stores/logs";
 import {DataTable, DataTableTd} from "@/components/widgets/table";
 import {headers} from './model/tableConfig'
 import './style/index.scss'
+import {useOrderBook} from "@/stores/orderBook";
 
 const storeCurrency = useCurrency()
 const storeLogs = useLogs()
+const storeOrderBook = useOrderBook()
 const {
   list,
   logs,
   selectedCurrencyId,
 } = useData(
   storeCurrency,
-  storeLogs
+  storeLogs,
+  storeOrderBook
 )
 </script>
