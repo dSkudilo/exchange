@@ -1,79 +1,51 @@
-# Vuetify (Default)
+ТЕСТОВОЕ ЗАДАНИЕ (текст представлен ниже)
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+Разработать приложение на Vue.js по заданию ниже, по возможности использовать VUE 3
+версии.
 
-## ❗️ Important Links
+Разработать адаптивное приложение для десктоп и мобильных платформ, состоящие из:
+1) Хедера. В хедере добавить произвольный логотип и меню для двух страниц(Настройки /
+Order Book).
+2) Области для отрисовки страниц. Страницы должны подгружаться динамически отдельными
+чанками по мере необходимости.
+3) Бизнес логики, работы с api и данными, вынесенными в стор и разбитыми на модули.
+4) В качестве ui библиотки желательно использовать vuetify, именование классов если
+потребуется реализовать по БЭМу.
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+--- ДАННЫЕ ---
 
-## 💿 Install
+В качестве источника данных необходимых для реализации страниц используем api Binance. А
+именно 2 метода: получить биржевой стакан по определенной валютной паре по REST и
+подписаться на обновления стакана по WS. (См. раздел Diff. Depth Stream в документации:
+https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md). Обратить
+внимание на
+https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manag
+e-a-local-order-book-correctly.
+Цены должны последовательно в стакане находиться + консистентность соблюдать
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+--- СТРАНИЦЫ ---
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+1) Страница с настройкой валютной пары и лог изменений.
 
-After completing the installation, your environment is ready for Vuetify development.
+  ● Реализовать селект с выбором валютной пары(Захардкодить список из BTCUSDT,
+BNBBTC, ETHBTC. По умолчанию выбрана BTCUSDT). При выборе обновляем данные
+в сторе(метод rest) и подключаемся по ws для обновления данных по валютной паре.
+  
+  ● Блок с логом наших действий по изменение валютной пары. С какой на какую мы
+изменили и во сколько времени.
+*Пример ордер бука и его правильной работы на https://www.binance.com/ru/trade/BTC_USDT
 
-## ✨ Features
-
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
-
-## 💡 Usage
-
-This section covers how to start the development server and build your project for production.
-
-### Starting the Development Server
-
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
-
-```bash
-yarn dev
-```
-
-(Repeat for npm, pnpm, and bun with respective commands.)
-
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
-
-### Building for Production
-
-To build your project for production, use:
-
-```bash
-yarn build
-```
-
-(Repeat for npm, pnpm, and bun with respective commands.)
-
-Once the build process is completed, your application will be ready for deployment in a production environment.
-
-## 💪 Support Vuetify Development
-
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
-
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
-
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
-
-Copyright (c) 2016-present Vuetify, LLC
+2) Страница с таблицей(Order Book).
+  
+  ● Выводим две таблицы рядом для двух массивов(Bids и Asks) с колонками: Price,
+Quantity, Total(Price * Quantity). В мобильной версии отображать только две
+колонки(Price, Total).
+  
+  ● Селект с выбором кол-ва элементов в таблице(100, 500, 1000).
+  
+  ● Требования к таблицам: на десктопе и на мобилке вместе две таблицы не должны
+превышать высоту экрана устройства (Скрол должен быть внутри таблиц. При скроле
+шапка с разбивкой по колонкам должна оставаться на месте).
+  
+  ● С точки зрения стиля(цвета, скругления, отступы) всё на собственный взгляд, но что бы
+выглядело опрятно.
